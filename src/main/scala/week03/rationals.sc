@@ -4,21 +4,24 @@ x.denom
 
 val y = new Rational(5, 7)
 
-x.add(y)
+x + y
 
-x.neg()
+-x
 
-x.subtract(y)
+x - y
 
 val z = new Rational(3, 2)
 
-x.subtract(y).subtract(z)
+x - y - z
 
-y.add(y)
+y.+(y)
+y + y
 
-x.less(y)
+x.<(y)
+x < y
 
 x.max(y)
+x max y
 
 new Rational(2)
 
@@ -33,20 +36,20 @@ class Rational(x: Int, y: Int) {
   val numer = x / g
   val denom = y / g
 
-  def less(that: Rational) = numer * that.denom < that.numer * denom
+  def < (that: Rational) = numer * that.denom < that.numer * denom
 
-  def max(that: Rational) = if (this.less(that)) that else this
+  def max(that: Rational) = if (this < that) that else this
 
-  def add(that: Rational) =
+  def + (that: Rational) =
     new Rational(
       numer * that.denom + that.numer * denom,
       denom * that.denom
     )
 
-  def neg():Rational =
+  def unary_- : Rational =
     new Rational(-numer, denom)
 
-  def subtract(that: Rational) = add(that.neg())
+  def - (that: Rational) = this + -that
 
   override def toString: String = numer + "/" + denom
 }
